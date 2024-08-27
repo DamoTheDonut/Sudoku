@@ -1,4 +1,4 @@
-/* styles.css */
+/* Base styles for the body and grid */
 body {
     display: flex;
     justify-content: center;
@@ -15,8 +15,8 @@ body {
     grid-template-rows: repeat(9, 1fr);
     width: 450px;
     height: 450px;
-    gap: 2px;
-    border: 3px solid black;
+    gap: 0; /* Remove gap between cells, borders will create separation */
+    border: 3px solid black; /* Outer border of the entire grid */
     background-color: white;
 }
 
@@ -24,7 +24,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* Default cell border */
     font-size: 24px;
     cursor: pointer;
     background-color: white;
@@ -32,18 +32,21 @@ body {
     transition: background-color 0.2s;
 }
 
-.cell.selected {
-    background-color: #d0e4f7; /* Highlight color */
-    border-color: #007bff;
-}
-
-/* Optional: Add thicker borders to visually separate 3x3 subgrids */
+/* Thicker borders for 3x3 sub-grid separation */
+/* Add thick borders to the right of every 3rd column */
 .cell:nth-child(3n) {
-    border-right: 2px solid black;
+    border-right: 3px solid black;
 }
 
+/* Add thick borders to the bottom of every 3rd row */
 .sudoku-board > .cell:nth-child(n+19):nth-child(-n+27),
 .sudoku-board > .cell:nth-child(n+46):nth-child(-n+54),
 .sudoku-board > .cell:nth-child(n+73):nth-child(-n+81) {
-    border-bottom: 2px solid black;
+    border-bottom: 3px solid black;
+}
+
+/* Highlight the selected cell */
+.cell.selected {
+    background-color: #d0e4f7; /* Highlight color */
+    border-color: #007bff;
 }
