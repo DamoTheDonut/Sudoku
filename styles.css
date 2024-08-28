@@ -16,7 +16,9 @@ body {
     width: 450px;
     height: 450px;
     gap: 0; /* Remove gap between cells, borders will create separation */
-    border: 3px solid black; /* Outer border of the entire grid */
+    /*border: 3px solid black; /* Outer border of the entire grid */
+    border-top: 3px solid red;
+    border-left: 3px solid red;
     background-color: white;
 }
 
@@ -35,7 +37,7 @@ body {
 /* Thicker borders for 3x3 sub-grid separation */
 /* Add thick borders to the right of every 3rd column */
 .cell:nth-child(3n) {
-    border-right: 3px solid black;
+    border-right: 3px solid red;
 }
 
 /* Add thick borders to the bottom of every 3rd row */

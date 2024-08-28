@@ -4,25 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>9x9 Sudoku Grid</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Include the CSS from the previous example */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .sudoku-board {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            width: 450px;
+            height: 450px;
+            gap: 0;
+            border: 3px solid black;
+            background-color: white;
+        }
+
+        .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: white;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+
+        /* Thicker borders for 3x3 sub-grid separation */
+        .cell:nth-child(3n) {
+            border-right: 2px solid black;
+        }
+        
+        .cell:nth-child(3n+1) {
+            border-left: 2px solid black;
+        }
+
+        .sudoku-board > .cell:nth-child(n+19):nth-child(-n+27),
+        .sudoku-board > .cell:nth-child(n+46):nth-child(-n+54),
+        .sudoku-board > .cell:nth-child(n+73):nth-child(-n+81) {
+            border-bottom: 2px solid black;
+        }
+        
+        .sudoku-board > .cell:nth-child(n+1):nth-child(-n+9),
+        .sudoku-board > .cell:nth-child(n+28):nth-child(-n+36),
+        .sudoku-board > .cell:nth-child(n+55):nth-child(-n+63) {
+            border-top: 2px solid black;
+        }
+        /* Highlight the selected cell */
+        .cell.selected {
+            
+            background-color: hsl(50, 70%, 90%);
+            border: 2px solid hsl(50, 100%, 50%) !important;
+            /*border: 2px solid hsl(50, 100%, 50%);*/
+        }
+    </style>
 </head>
 <body>
-    <div class="sudoku-board">
-        <!-- Create 81 cells for the 9x9 grid -->
-        <!-- Using a loop in a templating language or script would be more efficient in a real project -->
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <!-- Repeat the above block 8 more times for all rows -->
-        <!-- Total 81 cells -->
-    </div>
+    <!-- The grid will be dynamically generated inside this container -->
+    <div class="sudoku-board" id="sudokuBoard"></div>
+    <div class="number-select" id="numSelect"></div>
+    <script>
+        // JavaScript to create the grid dynamically
+        const sudokuBoard = document.getElementById('sudokuBoard');
 
-    <script src="script.js"></script>
+        // Loop to create 81 cells
+        for (let i = 0; i < 81; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            
+            // Add event listener for cell selection
+            cell.addEventListener('click', function() {
+                document.querySelectorAll('.cell').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+            
+            // Append the cell to the grid
+            sudokuBoard.appendChild(cell);
+        }
+    </script>
 </body>
 </html>
